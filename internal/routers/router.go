@@ -1,14 +1,14 @@
 package routers
 
 import (
-	"GGblog/utils"
+	"GGblog/internal/setting"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() {
-	gin.SetMode(utils.AppConf.Mode)
+	gin.SetMode(setting.AppConf.Mode)
 	r := gin.Default()
 
 	router := r.Group("/api/v1")
@@ -20,5 +20,5 @@ func InitRouter() {
 		})
 	}
 
-	r.Run(utils.AppConf.Port)
+	r.Run(setting.AppConf.Port)
 }

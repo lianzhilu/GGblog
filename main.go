@@ -1,11 +1,13 @@
 package main
 
 import (
-	"GGblog/routers"
-	"GGblog/utils"
+	"GGblog/internal/model"
+	"GGblog/internal/routers"
+	"GGblog/internal/setting"
 )
 
 func main() {
-	utils.Init("./config/config.yaml")
+	setting.Init("./config/config.yaml")
+	model.InitDatabase()
 	routers.InitRouter()
 }

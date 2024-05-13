@@ -1,9 +1,8 @@
 package model
 
 import (
-	"GGblog/utils"
+	"GGblog/internal/setting"
 	"fmt"
-	"time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -11,14 +10,16 @@ import (
 
 func InitDatabase() {
 	dsn := fmt.Sprintf("%s:%s@tcp(127.0.0.1:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		utils.MySQLConf.User,
-		utils.MySQLConf.Password,
-		utils.MySQLConf.Port,
-		utils.MySQLConf.Name)
+		setting.MySQLConf.User,
+		setting.MySQLConf.Password,
+		setting.MySQLConf.Port,
+		setting.MySQLConf.Name)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("connect to database failed", err.Error())
 	}
+
+	db.AutoMigrate(&User{}, &Article{})
 
 	// 获取通用数据库对象 sql.DB ，然后使用其提供的功能
 	sqlDB, _ := db.DB()
@@ -30,5 +31,5 @@ func InitDatabase() {
 	sqlDB.SetMaxOpenConns(100)
 
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。
-	sqlDB.SetConnMaxLifetime(time.Hour)
+	// sqlDB.SetConnMaxLifetime(time.Hour)
 }
