@@ -8,18 +8,21 @@ import (
 	"gorm.io/gorm"
 )
 
+var db *gorm.DB
+var err error
+
 func InitDatabase() {
 	dsn := fmt.Sprintf("%s:%s@tcp(127.0.0.1:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		setting.MySQLConf.User,
 		setting.MySQLConf.Password,
 		setting.MySQLConf.Port,
 		setting.MySQLConf.Name)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("connect to database failed", err.Error())
 	}
 
-	db.AutoMigrate(&User{}, &Article{})
+	// db.AutoMigrate(&User{}, &Article{})
 
 	// 获取通用数据库对象 sql.DB ，然后使用其提供的功能
 	sqlDB, _ := db.DB()

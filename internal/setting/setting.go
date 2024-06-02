@@ -7,8 +7,9 @@ import (
 )
 
 type AppConfig struct {
-	Mode string
-	Port string
+	Mode   string
+	Port   string
+	JwtKey string
 }
 
 type MySQLConfig struct {
@@ -39,6 +40,7 @@ func Init(dir string) {
 	{
 		AppConf.Mode = appMap["mode"]
 		AppConf.Port = appMap["port"]
+		AppConf.JwtKey = appMap["jwtkey"]
 	}
 
 	mysqlMap := viper.GetStringMapString("mysql")

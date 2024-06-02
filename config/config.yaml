@@ -1,6 +1,7 @@
 server:
   mode: debug
   port: :8080
+  jwtkey: hellogo
 
 mysql:
   host: localhost
