@@ -9,3 +9,9 @@ mysql:
   user: root
   password: 123456
   name: ggblog
+
+qiniu:
+  accesskey: 0Kpw-ItaVA9JTa1ZMiloRUqYRt5Bcof_dOGbbdP9
+  secretkey: YaNc-e7DlmtYzQL_SuMDLT5XWGn-VLO_dW_Psbku
+  bucket: ggbloglian
+  server: http://sefzgm5p6.hd-bkt.clouddn.com/

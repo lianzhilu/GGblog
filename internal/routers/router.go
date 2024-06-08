@@ -2,7 +2,9 @@ package routers
 
 import (
 	"GGblog/internal/controller"
+	"GGblog/internal/middleware/cors"
 	"GGblog/internal/middleware/jwt"
+	"GGblog/internal/middleware/logger"
 	"GGblog/internal/setting"
 	"net/http"
 
@@ -12,6 +14,8 @@ import (
 func InitRouter() {
 	gin.SetMode(setting.AppConf.Mode)
 	r := gin.Default()
+	r.Use(logger.LoggerMiddlerware())
+	r.Use(cors.CorsMiddleware())
 
 	// 需要jwt验证的接口
 	authV1 := r.Group("api/v1")
@@ -33,13 +37,16 @@ func InitRouter() {
 
 		// 删除文章
 		authV1.DELETE("article/:id", controller.DeleteArticle)
+
+		// 上传文件
+		authV1.POST("upload", controller.Upload)
 	}
 
 	// 不需要jwt验证的接口
 	routerV1 := r.Group("/api/v1")
 	{
 		// 测试联通
-		routerV1.GET("/ping", func(ctx *gin.Context) {
+		routerV1.GET("ping", func(ctx *gin.Context) {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status": "ok",
 			})

@@ -1,0 +1,1 @@
+time="2024-06-03T16:24:29+08:00" level=info Agent=PostmanRuntime/7.38.0 DataSize=250 HostName="砖头" Ip="::1" Method=POST Path=/api/v1/user/add SpendTime="54 ms" status=200

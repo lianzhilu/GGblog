@@ -20,9 +20,17 @@ type MySQLConfig struct {
 	Name     string
 }
 
+type QiniuConfig struct {
+	AccessKey string
+	SecretKey string
+	Bucket    string
+	Server    string
+}
+
 var (
 	AppConf   AppConfig
 	MySQLConf MySQLConfig
+	QiniuConf QiniuConfig
 )
 
 func Init(dir string) {
@@ -52,4 +60,11 @@ func Init(dir string) {
 		MySQLConf.Name = mysqlMap["name"]
 	}
 
+	qiniuMap := viper.GetStringMapString("qiniu")
+	{
+		QiniuConf.AccessKey = qiniuMap["accesskey"]
+		QiniuConf.SecretKey = qiniuMap["secretkey"]
+		QiniuConf.Bucket = qiniuMap["bucket"]
+		QiniuConf.Server = qiniuMap["server"]
+	}
 }
